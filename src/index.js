@@ -19,8 +19,8 @@ function* watcherSaga() {
 //generator function that makes a GET to 
 function* getFavorites() {
     try{
-        const response = axios.get('/api/favorite');
-        yield console.log('This is what we get from axios.get: ', response);
+        const response = yield axios.get('/api/favorite');
+        yield console.log('This is what we get from axios.get: ', response.data);
         yield put ({ type: 'SET_FAVORITES', payload: response.data})
     }
     catch (error) {

@@ -12,12 +12,18 @@ class Favorited extends Component {
     return (
       <div>
         <h1>Giphy Search!</h1>
-        {JSON.stringify(this.props.reduxState.showGifs)}
+        {                             
+          this.props.reduxState.showGifs.map((gifs, index)=>
+            <img key={index} src={gifs.image_url}></img>)
+        }
+        
         
       </div>
     ); // end return
   } // end render
 } // end class
+
+
 
 const mapStateToProps = (reduxState)=>({
     reduxState
