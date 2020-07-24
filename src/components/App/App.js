@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+
+import Favorited from '../Favorited/Favorited';
 import SearchForm from '../SearchForm/SearchForm';
 import SearchList from '../SearchList/SearchList';
 import './App.css';
 import { connect } from 'react-redux';
+
 
 class App extends Component {
   componentDidMount() {
@@ -15,10 +18,12 @@ class App extends Component {
         <h1>Giphy Search!</h1>
         <SearchForm />
         <SearchList />
+        <Favorited />
       </div>
     );
   }
 }
+
 
 const putReduxStateOnProps = (reduxState) => ({
   reduxState,
