@@ -13,9 +13,24 @@ import axios from 'axios'; // end imports
 
 // Main generator function
 function* watcherSaga() {
-    yield takeEvery('FETCH_FAVORITES', getFavorites)
+    yield takeEvery('FETCH_FAVORITES', getFavorites);
+    yield takeEvery('SET_CATEGORY', updateCategory)
 }// end watcherSaga
   
+function* updateCategory(action) {
+    try{
+        //we need to get the data to updateCategory in here
+        console.log('in updateCategory');
+        const response = yield axios.put('/api/favorite', action.payload);
+        yield console.log('In updateCategory', response);
+        yield put ({ type: 'FETCH_FAVORITES'})
+    }
+    catch(error) {
+        console.log( 'Trouble adding to category', error )
+    }
+}
+
+
 //generator function that makes a GET to 
 function* getFavorites() {
     try{
@@ -31,11 +46,15 @@ function* getFavorites() {
 const showGifs = (state=[], action) => {
     switch(action.type){
         case 'SET_FAVORITES':
+
             return action.payload;
         default:
             return state;
     }
 }
+
+//make a reducer to store the payload: {id: #, category_id: #}
+        //then call updateCategory(payload)
 
 
 const sagaMiddleware = createSagaMiddleware();

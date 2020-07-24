@@ -40,7 +40,7 @@ You will need 2 views for the Base Features. You should put some thought into th
         The actual images need to appear on the DOM.
 
         √  favorites table
-        -> retrieve fav information from the database GET CALL Favorites
+        -√ retrieve fav information from the database GET CALL Favorites
              √ {id: , image_url: https://giphy.com/gifs/bath-gorilla-DKCNQcgbdekrC, category_id: }
                 conditionally render the length of the response
 
@@ -51,9 +51,6 @@ You will need 2 views for the Base Features. You should put some thought into th
 
 
 - Allow a user to set a category for a favorite image.
-      -> Category Table in DB with
-      {category_name: [dogs, random, lol, oof, sports, fashion]}
-
 
       ->
       - Each favorite image can only have 1 category at a time.
