@@ -47,7 +47,7 @@ class SearchForm extends Component {
             onChange={(event) => this.handleNameChange(event, 'name')}
             placeholder="name"
           />
-          {/* <pre>{JSON.stringify(this.props.reduxState)}</pre> */}
+          {/**<pre>{JSON.stringify(this.props.reduxState)}</pre> */}
 
           <input type="submit" value="Add New Search" />
         </form>
