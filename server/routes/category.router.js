@@ -23,12 +23,12 @@ router.get('/search', (req, res) => {
   console.log('Hit server to get searched gifs...', req.query.searchName);
   console.log(
     `this is the link`,
-    `http://api.giphy.com/v1/gifs/search?api_key=${process.env.GIPHY_API_KEY}&limit=5&rating=g&q=${req.query.searchName}`
+    `http://api.giphy.com/v1/gifs/search?api_key=${process.env.GIPHY_API_KEY}&limit=2&rating=g&q=${req.query.searchName}`
   );
 
   // req.query.searchName is coming from the index.js
   Axios.get(
-    `http://api.giphy.com/v1/gifs/search?api_key=${process.env.GIPHY_API_KEY}&limit=5&rating=g&q=${req.query.searchName}`
+    `http://api.giphy.com/v1/gifs/search?api_key=${process.env.GIPHY_API_KEY}&limit=2&rating=g&q=${req.query.searchName}`
   )
     // api.giphy.com/v1/gifs/search?api_key=DCCQVL9Wnov2WkrU0Mzm3429Fy3ck0lQ&limit=5&rating=g&q=cheeseburger
 

@@ -39,7 +39,6 @@ class SearchForm extends Component {
   render() {
     return (
       <div>
-        <h3>This is the Search form</h3>
         {/* <pre>{JSON.stringify(this.state)}</pre> */}
         <form onSubmit={this.addNewSearch}>
           <input
@@ -48,7 +47,7 @@ class SearchForm extends Component {
             onChange={(event) => this.handleNameChange(event, 'name')}
             placeholder="name"
           />
-          {/* <pre>{JSON.stringify(this.props.reduxState)}</pre> */}
+          {/***<pre>{JSON.stringify(this.props.reduxState)}</pre> */}
 
           <input type="submit" value="Add New Search" />
         </form>
