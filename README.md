@@ -30,15 +30,15 @@ You will need 2 views for the Base Features. You should put some thought into th
 [x] - Query the `Giphy API Search Endpoint` with the given search string FROM THE SERVER.
 [x] - Display the results on the DOM.
 
-[] - Allow a user to Favorite any of the result images. You'll need to think about what information to save to your own database. Generally you only store the minimum needed to show this image again on the Favorites view.
+[X] - Allow a user to Favorite any of the result images. You'll need to think about what information to save to your own database. Generally you only store the minimum needed to show this image again on the Favorites view.
 
 ### Favorites View (Amir & Robert)
 
 [x] - Allow a user to see all of the Giphy images they have Favorited. The actual images need to appear on the DOM.
 [x] - Allow a user to set a category for a favorite image.
 
-[x]   - Each favorite image can only have 1 category at a time.
-[x]   - The category needs to be one of the categories in the database.
+[x] - Each favorite image can only have 1 category at a time.
+[x] - The category needs to be one of the categories in the database.
 
 ## Existing Routes
 
@@ -46,14 +46,15 @@ You are given two router modules on the server with stubs for the routes you may
 
 [] - `GET /api/category` (complete)
 
-  - returns a list of all categories from the table ordered by name. You may test it if your server is running: [http://localhost:5000/api/category](http://localhost:5000/api/category)
+- returns a list of all categories from the table ordered by name. You may test it if your server is running: [http://localhost:5000/api/category](http://localhost:5000/api/category)
 
 [] - `POST /api/favorite` (incomplete)
 
-  - for adding a new favorite image. You'll need to think about what is needed. Does it need a category?
+- for adding a new favorite image. You'll need to think about what is needed. Does it need a category?
 
 [] - `PUT /api/favorite` (incomplete)
-  - for setting a category on an image. It expects both a query parameter and a data body. Feel free to change it.
+
+- for setting a category on an image. It expects both a query parameter and a data body. Feel free to change it.
 
 ## Stretch Features
 

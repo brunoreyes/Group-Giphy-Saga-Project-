@@ -59,15 +59,12 @@ class SearchList extends Component {
             ))}
           </tbody>
         </table>
-            {/* <pre>{JSON.stringify(this.props.reduxState.searchName)}</pre> */}
-            <pre>{JSON.stringify(this.props.reduxState.favoriteName)}</pre>
-
-        </div>
-
+        {/* <pre>{JSON.stringify(this.props.reduxState.searchName)}</pre> */}
+        <pre>{JSON.stringify(this.props.reduxState.favoriteName)}</pre>
+      </div>
     );
   }
 }
-
 
 const mapStateToProps = (reduxState) => ({
   reduxState,
