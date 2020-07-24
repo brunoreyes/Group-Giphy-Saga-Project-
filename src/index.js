@@ -22,6 +22,19 @@ function* updateCategory(action) {
     }
 }
 
+function* addFavorite(action) {
+    try{
+        //we need to get the data to updateCategory in here             
+        console.log('in addFavorite ');              
+        const response = yield axios.post('/api/favorite', action.payload);
+        yield console.log('In updateCategory', response);
+        yield put ({ type: 'FETCH_FAVORITES'})
+    }
+    catch(error) {
+        console.log( 'Trouble adding to category', error )
+    }
+}
+
 function* getSearchSaga(action) {
   try {
     console.log('Searching with:', action.payload);
@@ -62,7 +75,7 @@ const searchName = (state = [], action) => {
 const favoriteName = (state = [], action) => {
   console.log('in favoriteName', action.payload);
 
-  if (action.type === 'SEND_FAVORITE') {
+  if (action.type === 'Send') {
     return action.payload;
   }
   return state;
@@ -84,9 +97,13 @@ function* rootSaga() {
   yield takeEvery('FETCH_SEARCH', getSearchSaga);
   yield takeEvery('FETCH_FAVORITES', getFavorites);
   yield takeEvery('SET_CATEGORY', updateCategory);
+  yield takeEvery('SEND_FAVORITE', addFavorite)
   // yield takeEvery('SEND_FAVORITE', favoriteSearchSaga);
   // yield takeEvery('DELETE_SEARCH', deleteSearchSaga);
 } //end rootSaga
+
+// ---------------- apply saga middleware ------------------
+const sagaMiddleware = createSagaMiddleware();
 
 // -------------------- REDUX Store ---------------------
 const storeInstance = createStore(
@@ -98,8 +115,6 @@ const storeInstance = createStore(
   applyMiddleware(sagaMiddleware, logger)
 ); // end store
 
-// ---------------- apply saga middleware ------------------
-const sagaMiddleware = createSagaMiddleware();
 // Pass rootSaga into our sagaMiddleware
 sagaMiddleware.run(rootSaga);
 

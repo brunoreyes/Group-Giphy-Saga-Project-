@@ -39,7 +39,6 @@ class SearchForm extends Component {
   render() {
     return (
       <div>
-        <h3>This is the Search form</h3>
         {/* <pre>{JSON.stringify(this.state)}</pre> */}
         <form onSubmit={this.addNewSearch}>
           <input
