@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App/App';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
@@ -7,16 +7,8 @@ import {logger} from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import {takeEvery, put} from 'redux-saga/effects';
 import axios from 'axios'; // end imports
-
-//create a store
-//wrap app 
-
-// Main generator function
-function* watcherSaga() {
-    yield takeEvery('FETCH_FAVORITES', getFavorites);
-    yield takeEvery('SET_CATEGORY', updateCategory)
-}// end watcherSaga
   
+// ------------ THESE ARE OUR GENERATOR FUNCTIONS --------------
 function* updateCategory(action) {
     try{
         //we need to get the data to updateCategory in here             
@@ -30,6 +22,20 @@ function* updateCategory(action) {
     }
 }
 
+function* getSearchSaga(action) {
+  try {
+    console.log('Searching with:', action.payload);
+
+    const response = yield axios.get(
+      `/api/category/search?searchName=${action.payload.name}`
+    );
+
+    // coming from search form
+    yield put({ type: 'SET_SEARCH', payload: response.data });
+  } catch (error) {
+    console.log('error with Search get request:', error);
+  } //end axios
+} //end getSearchSaga
 
 //generator function that makes a GET to 
 function* getFavorites() {
@@ -43,6 +49,25 @@ function* getFavorites() {
     }
 }
 
+// ------------ THESE ARE OUR REDUCERS --------------
+
+//this reducer holds the searched for name
+const searchName = (state = [], action) => {
+  if (action.type === 'SET_SEARCH') {
+    return action.payload;
+  }
+  return state;
+};
+
+const favoriteName = (state = [], action) => {
+  console.log('in favoriteName', action.payload);
+
+  if (action.type === 'SEND_FAVORITE') {
+    return action.payload;
+  }
+  return state;
+};
+
 const showGifs = (state=[], action) => {
     switch(action.type){
         case 'SET_FAVORITES':
@@ -53,23 +78,39 @@ const showGifs = (state=[], action) => {
     }
 }
 
-//make a reducer to store the payload: {id: #, category_id: #}
-        //then call updateCategory(payload)
+// -------------------- Root/Watcher for the Sagas ---------------------
+// Create the rootSaga generator function
+function* rootSaga() {
+  yield takeEvery('FETCH_SEARCH', getSearchSaga);
+  yield takeEvery('FETCH_FAVORITES', getFavorites);
+  yield takeEvery('SET_CATEGORY', updateCategory);
+  // yield takeEvery('SEND_FAVORITE', favoriteSearchSaga);
+  // yield takeEvery('DELETE_SEARCH', deleteSearchSaga);
+} //end rootSaga
 
-
-const sagaMiddleware = createSagaMiddleware();
-
-// This will be used to store our reducers so that they 
-// will be accessible to other components
-const store = createStore(
+// -------------------- REDUX Store ---------------------
+const storeInstance = createStore(
   combineReducers({
-    showGifs
+    showGifs,
+    searchName,
+    favoriteName
   }),
   applyMiddleware(sagaMiddleware, logger)
 ); // end store
 
-sagaMiddleware.run(watcherSaga);
+// ---------------- apply saga middleware ------------------
+const sagaMiddleware = createSagaMiddleware();
+// Pass rootSaga into our sagaMiddleware
+sagaMiddleware.run(rootSaga);
 
 
-ReactDOM.render(<Provider store={store}><App /></Provider>, 
-    document.getElementById('react-root'));
+// -------------- connect redux store to app ---------------
+ReactDOM.render(
+  <Provider store={storeInstance}>
+    <App />
+  </Provider>,
+  document.getElementById('react-root')
+  //   Change react to react-root
+);
+// registerServiceWorker();
+
