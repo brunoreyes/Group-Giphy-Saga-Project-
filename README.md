@@ -26,17 +26,38 @@ You will need 2 views for the Base Features. You should put some thought into th
 
 ### Search View (Bruno & Josh)
 
+- Allow a user to enter a search string and submit a search request.
+- Query the `Giphy API Search Endpoint` with the given search string FROM THE SERVER.
+- Display the results on the DOM.
+
+- Allow a user to Favorite any of the result images. You'll need to think about what information to save to your own database. Generally you only store the minimum needed to show this image again on the Favorites view.
+
+  POST TO FAVORITES TABLE
+  {id: 1, image_url: https://giphy.com/gifs/bath-gorilla-DKCNQcgbdekrC}
+
+### Favorites View
+
+- Allow a user to see all of the Giphy images they have Favorited.
+  The actual images need to appear on the DOM.
+
+        √  favorites table
+        -√ retrieve fav information from the database GET CALL Favorites
+             √ {id: , image_url: https://giphy.com/gifs/bath-gorilla-DKCNQcgbdekrC, category_id: }
+                conditionally render the length of the response
+
+* Allow a user to set a category for a favorite image.
+  -> - Each favorite image can only have 1 category at a time. - The category needs to be one of the categories in the database.
+
+=======
 [x] - Allow a user to enter a search string and submit a search request.
 [x] - Query the `Giphy API Search Endpoint` with the given search string FROM THE SERVER.
 [x] - Display the results on the DOM.
-
 [X] - Allow a user to Favorite any of the result images. You'll need to think about what information to save to your own database. Generally you only store the minimum needed to show this image again on the Favorites view.
 
 ### Favorites View (Amir & Robert)
 
 [x] - Allow a user to see all of the Giphy images they have Favorited. The actual images need to appear on the DOM.
 [x] - Allow a user to set a category for a favorite image.
-
 [x] - Each favorite image can only have 1 category at a time.
 [x] - The category needs to be one of the categories in the database.
 
@@ -44,21 +65,20 @@ You will need 2 views for the Base Features. You should put some thought into th
 
 You are given two router modules on the server with stubs for the routes you may need.
 
-[] - `GET /api/category` (complete)
+- `GET /api/category` (complete)
 
 - returns a list of all categories from the table ordered by name. You may test it if your server is running: [http://localhost:5000/api/category](http://localhost:5000/api/category)
-
-[] - `POST /api/favorite` (incomplete)
+- `POST /api/favorite` (incomplete)
 
 - for adding a new favorite image. You'll need to think about what is needed. Does it need a category?
 
-[] - `PUT /api/favorite` (incomplete)
+- `PUT /api/favorite` (incomplete)
 
 - for setting a category on an image. It expects both a query parameter and a data body. Feel free to change it.
 
 ## Stretch Features
 
 [] 1. Allow favorites to be removed/unfavorited
-[] 2. Allow for a favorite to have many categories
+[x] 2. Allow for a favorite to have many categories
 [] 3. Implement the pagination feature of the Giphy search results
 [] 4. Add another view that allows a user to manage (create, edit, delete) categories
