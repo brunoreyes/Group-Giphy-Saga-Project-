@@ -19,8 +19,8 @@ function* watcherSaga() {
   
 function* updateCategory(action) {
     try{
-        //we need to get the data to updateCategory in here
-        console.log('in updateCategory');
+        //we need to get the data to updateCategory in here             
+        console.log('in updateCategory');              
         const response = yield axios.put('/api/favorite', action.payload);
         yield console.log('In updateCategory', response);
         yield put ({ type: 'FETCH_FAVORITES'})

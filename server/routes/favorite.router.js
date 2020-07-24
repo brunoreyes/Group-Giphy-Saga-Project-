@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/', (req, res) => {
 
 
-const searchQuery = `SELECT * FROM favorite;`;
+const searchQuery = `SELECT * FROM favorite ORDER BY id ASC;`;
 
 //pool is our connection to the database
 //we are going to query a queryString command to pool (database)
@@ -40,8 +40,7 @@ router.put('/', (req, res) => {
   console.log(category_id);
   console.log(id);
 
-  let queryString = `UPDATE favorite SET category_id=$1 WHERE id=$2;`
-
+  let queryString = `UPDATE favorite SET category_id=$1 WHERE id=$2;`;
   pool.query(queryString, [category_id, id])
     .then(response=>{
       console.log('Response from db', response)
