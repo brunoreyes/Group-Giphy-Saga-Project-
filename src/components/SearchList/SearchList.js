@@ -24,10 +24,12 @@ class SearchList extends Component {
 
   favorite = (url) => {
     // Create an axios post request line an insert into favorite
+    const payload = {url};
+    console.log('change this!!!', payload)
     console.log('favorite pressed:', url);
     this.props.dispatch({
       type: 'SEND_FAVORITE',
-      payload: url,
+      payload
     });
     //   url, description & id
   };
@@ -36,7 +38,6 @@ class SearchList extends Component {
     return (
       <div>
         <h3>Search Results</h3>
-        <pre>{JSON.stringify(this.props.reduxState.searchName)}</pre>
         {/* mapping each item within the array and them calling them searchItem */}
         <table>
           <thead>
@@ -60,7 +61,6 @@ class SearchList extends Component {
           </tbody>
         </table>
         {/* <pre>{JSON.stringify(this.props.reduxState.searchName)}</pre> */}
-        <pre>{JSON.stringify(this.props.reduxState.favoriteName)}</pre>
       </div>
     );
   }

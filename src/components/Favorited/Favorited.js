@@ -16,7 +16,7 @@ class Favorited extends Component {
   render() {
     return (
       <div>
-        <h1>Giphy Search!</h1>
+        <h1>Favorites!</h1>
         {this.props.reduxState.showGifs.map((gifs, index) => (
           <div key={index} id={gifs.id}>
             <img src={gifs.image_url}></img>
